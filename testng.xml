@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite" parallel="classes" thread-count="4">
+    <test name = "get Entity">
+        <classes>
+            <class name="test.service.tests.GetEntityTest"/>
+        </classes>
+    </test>
+    <test name="post Entity">
+        <classes>
+            <class name="test.service.tests.CreateEntityTest"/>
+        </classes>
+    </test>
+    <test name="delete Entity">
+        <classes>
+            <class name="test.service.tests.DeleteEntityTest"/>
+        </classes>
+    </test>
+    <test name="get all Entities">
+        <classes>
+            <class name="test.service.tests.GetAllEntitiesTest"/>
+        </classes>
+    </test>
+</suite>
