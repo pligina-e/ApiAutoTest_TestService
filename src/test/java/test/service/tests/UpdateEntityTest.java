@@ -4,17 +4,29 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
+import io.restassured.http.ContentType;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import test.service.model.EntityResponseModel;
+import test.service.model.EntityAdditionRequestModel;
 
-import static io.restassured.RestAssured.given;
+import java.util.List;
 
 public class UpdateEntityTest extends BaseTest {
     private String idToUpdateEntity;
+    private EntityAdditionRequestModel entityForUpdate;
 
     @BeforeMethod
     public void beforeMethod() {
         idToUpdateEntity = steps.createEntity(requestSpecification, "title", "false");
+        entityForUpdate = steps.getEntityAdditionData("updateTitle", true, "info", 1, List.of(1,2,3));
+    }
+
+    @AfterMethod
+    public void afterMethod() {
+        steps.deleteEntity(requestSpecification, idToUpdateEntity);
     }
 
     @Test
@@ -22,34 +34,17 @@ public class UpdateEntityTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Test Description : update entity")
     public void patchEntity() {
-        String requestBody = "{\n" +
-                "  \"title\": \"updateTitle\",\n" +
-                "  \"verified\": false,\n" +
-                "  \"addition\": {\n" +
-                "  \"additional_info\": \"info\",\n" +
-                "  \"additional_number\": 2\n" +
-                "},\n" +
-                "  \"important_numbers\": [\n" +
-                "1,\n" + "2\n" + "]\n" + "}";
-        String requestBody2 = "{\n" +
-                "  \"addition\": {\n" +
-                "  \"additional_info\": \"info\",\n" +
-                "  \"additional_number\": 2\n" +
-                "},\n" +
-                "  \"important_numbers\": [\n" +
-                "1,\n" + "2\n" + "],\n" +
-                "  \"title\": \"updateTitle\",\n" +
-                "  \"verified\": false,\n" + "}";
-        String requestBody3 = "{\n" +
-                "  \"title\": \"updateTitle\"\n" + "}";
-
-        given().baseUri("http://localhost:8080/api/_/docs/swagger")
-        //given().baseUri("http://localhost:8080")
-                .body(requestBody3)
+        requestSpecification
+                .contentType(ContentType.JSON)
+                .body(entityForUpdate)
             .when()
-                .patch("/api/patch/" + idToUpdateEntity)
+                .patch(PATCH_ENDPOINT + idToUpdateEntity)
             .then()
-                .log().all()
                 .statusCode(204);
+
+        EntityResponseModel updatedEntity = steps.getEntity(requestSpecification, idToUpdateEntity);
+
+        Assert.assertEquals(updatedEntity.getTitle(), entityForUpdate.getTitle(), "Поле title не совпадает. Обновление произошло некорректно");
+        Assert.assertEquals(updatedEntity.getVerified(), entityForUpdate.getVerified(), "Поле verified не совпадает. Обновление произошло некорректно");
     }
 }
