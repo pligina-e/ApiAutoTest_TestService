@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite" parallel="classes" thread-count="4">
+<suite name="All Test Suite" parallel="classes" thread-count="5">
     <test name = "get Entity">
         <classes>
             <class name="test.service.tests.GetEntityTest"/>
@@ -19,6 +19,11 @@
     <test name="get all Entities">
         <classes>
             <class name="test.service.tests.GetAllEntitiesTest"/>
+        </classes>
+    </test>
+    <test name="update Entity">
+        <classes>
+            <class name="test.service.tests.UpdateEntityTest"/>
         </classes>
     </test>
 </suite>
