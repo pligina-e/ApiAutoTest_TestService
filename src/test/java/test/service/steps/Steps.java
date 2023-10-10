@@ -9,13 +9,16 @@ import test.service.model.EntityAdditionRequestModel;
 import java.util.List;
 
 public class Steps {
+    static final String GET_ENDPOINT = "/api/get/";
+    static final String POST_ENDPOINT = "/api/create";
+    static final String DELETE_ENDPOINT = "/api/delete/";
 
     @Step("Get-запрос для излечения данных о сущности с id = {id}")
     public static EntityResponseModel getEntity(RequestSpecification requestSpecification, String id) {
         return requestSpecification
                 .contentType("application/json")
             .when()
-                .get("/api/get/" + id)
+                .get(GET_ENDPOINT + id)
             .then()
                 .statusCode(200)
                 .extract()
@@ -28,7 +31,7 @@ public class Steps {
                 .param("title", title)
                 .param("verified", verified)
             .when()
-                .post("/api/create")
+                .post(POST_ENDPOINT)
             .then()
                 .statusCode(200)
                 .extract()
@@ -39,7 +42,7 @@ public class Steps {
     public static String deleteEntity(RequestSpecification requestSpecification, String id) {
         return requestSpecification
             .when()
-                .delete("/api/delete/" + id)
+                .delete(DELETE_ENDPOINT + id)
             .then()
                 .extract()
                 .asString();
@@ -50,7 +53,7 @@ public class Steps {
         return requestSpecification
                 .contentType("application/json")
             .when()
-                .get("/api/get/" + id)
+                .get(GET_ENDPOINT + id)
             .then()
                 .statusCode(500)
                 .extract()
@@ -65,7 +68,7 @@ public class Steps {
                 .build();
     }
 
-    @Step("Метод для сериализаии. Используется для обновления сущности PATCH-запросом")
+    @Step("Метод для обновления сущности PATCH-запросом")
     public EntityAdditionRequestModel getEntityAdditionData(String title, boolean verified, String additional_info, int additional_number, List<Integer> important_numbers) {
         return EntityAdditionRequestModel
                 .builder()
