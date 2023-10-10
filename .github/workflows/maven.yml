@@ -1,0 +1,29 @@
+name: Docker CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v3
+        with:
+          path: https://github.com/sun6r0/test-service/blob/main/docker-compose.yaml
+      - name: docker-compose
+        run: docker-compose up --build -https://github.com/sun6r0/test-service/blob/main/docker-compose.yaml
+        
+      - name: checkout repo
+        uses: actions/checkout@v3
+      - name: set up Java and Maven
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      - name: run tests
+        run: mvn -B clean test
