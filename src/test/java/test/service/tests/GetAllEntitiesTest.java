@@ -21,7 +21,7 @@ public class GetAllEntitiesTest extends BaseTest {
         List <EntityResponseModel> response = requestSpecification
                 .contentType(ContentType.JSON)
             .when()
-                .get("/api/getAll")
+                .get(GETALL_ENDPOINT)
             .then()
                 .statusCode(200)
                 .extract()
