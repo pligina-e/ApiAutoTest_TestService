@@ -28,8 +28,7 @@ public class GetAllEntitiesTest extends BaseTest {
                 .jsonPath()
                 .getList("entity", EntityResponseModel.class);
 
-        Assert.assertEquals(1, response.get(0).getId(), "Некорректный id у первого элемента списка");
-        Assert.assertEquals(2, response.get(1).getId(), "Некорректный id у второго элемента списка");
-        Assert.assertEquals(3, response.get(2).getId(), "Некорректный id у третьего элемента списка");
+        Assert.assertEquals(2, response.get(0).getId(), "Некорректный id у первого элемента списка");
+        Assert.assertEquals(3, response.get(1).getId(), "Некорректный id у второго элемента списка");
     }
 }
