@@ -24,7 +24,7 @@ public class DeleteEntityTest extends BaseTest {
         requestSpecification
                 .header("Content-type", "application/json")
             .when()
-                .delete("/api/delete/" + idToDeleteEntity)
+                .delete(DELETE_ENDPOINT + idToDeleteEntity)
             .then()
                 .statusCode(204);
 
