@@ -59,23 +59,4 @@ public class Steps {
                 .extract()
                 .as(EntityResponseModel.class);
     }
-
-    public AdditionRequestModel getAdditionData(String additional_info, int additional_number) {
-        return AdditionRequestModel
-                .builder()
-                    .additional_info((additional_info))
-                    .additional_number(additional_number)
-                .build();
-    }
-
-    @Step("Метод для обновления сущности PATCH-запросом")
-    public EntityAdditionRequestModel getEntityAdditionData(String title, boolean verified, String additional_info, int additional_number, List<Integer> important_numbers) {
-        return EntityAdditionRequestModel
-                .builder()
-                    .title(title)
-                    .verified(verified)
-                    .addition(getAdditionData(additional_info, additional_number))
-                    .important_numbers(important_numbers)
-                .build();
-    }
 }
