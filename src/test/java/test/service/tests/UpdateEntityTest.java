@@ -1,5 +1,7 @@
 package test.service.tests;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
@@ -16,12 +18,15 @@ import java.util.List;
 
 public class UpdateEntityTest extends BaseTest {
     private String idToUpdateEntity;
+    private String entityAsString;
     private EntityAdditionRequestModel entityForUpdate;
+    ObjectMapper objectMapper = new ObjectMapper();
 
     @BeforeMethod
-    public void beforeMethod() {
+    public void beforeMethod() throws JsonProcessingException {
         idToUpdateEntity = steps.createEntity(requestSpecification, "title", "false");
         entityForUpdate = steps.getEntityAdditionData("updateTitle", true, "info", 1, List.of(1,2,3));
+        entityAsString = objectMapper.writeValueAsString(entityForUpdate);
     }
 
     @AfterMethod
@@ -36,7 +41,7 @@ public class UpdateEntityTest extends BaseTest {
     public void patchEntity() {
         requestSpecification
                 .contentType(ContentType.JSON)
-                .body(entityForUpdate)
+                .body(entityAsString)
             .when()
                 .patch(PATCH_ENDPOINT + idToUpdateEntity)
             .then()
