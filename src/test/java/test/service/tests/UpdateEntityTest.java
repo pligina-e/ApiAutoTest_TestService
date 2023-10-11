@@ -11,6 +11,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import test.service.model.AdditionRequestModel;
 import test.service.model.EntityResponseModel;
 import test.service.model.EntityAdditionRequestModel;
 
@@ -19,13 +20,13 @@ import java.util.List;
 public class UpdateEntityTest extends BaseTest {
     private String idToUpdateEntity;
     private String entityAsString;
-    private EntityAdditionRequestModel entityForUpdate;
+    private AdditionRequestModel additionRequestModel = new AdditionRequestModel("info", 1);
+    private EntityAdditionRequestModel entityForUpdate = new EntityAdditionRequestModel("updateTitle", true, additionRequestModel, List.of(1,2,3));
     ObjectMapper objectMapper = new ObjectMapper();
 
     @BeforeMethod
     public void beforeMethod() throws JsonProcessingException {
         idToUpdateEntity = steps.createEntity(requestSpecification, "title", "false");
-        entityForUpdate = steps.getEntityAdditionData("updateTitle", true, "info", 1, List.of(1,2,3));
         entityAsString = objectMapper.writeValueAsString(entityForUpdate);
     }
 
