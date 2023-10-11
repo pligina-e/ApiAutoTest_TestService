@@ -27,6 +27,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: sun6r0/test-service
+          path: sun6r0
 
       - name: checkout repo
         uses: actions/checkout@v4
@@ -36,7 +37,7 @@ jobs:
       - name: build docker-compose
         uses: isbang/compose-action@v1.5.1
         with:
-          compose-file: "https://github.com/sun6r0/test-service/blob/main/docker-compose.yaml"
+          compose-file: "sun6r0/docker-compose.yaml"
           up-flags: "--build -d"
           
       - name: build with Maven
