@@ -1,3 +1,4 @@
+[![.github/workflows/maven.yml](https://github.com/pligina-e/ApiAutoTest_TestService/actions/workflows/maven.yml/badge.svg)](https://github.com/pligina-e/ApiAutoTest_TestService/actions/workflows/maven.yml)
 # ApiAutoTest_TestService
 Автоматизированное тестирование сервиса, который предоставляет точки доступа для управления сущностями в базе данных PostgreSQL, подробнее: [test-service](https://github.com/sun6r0/test-service)
 ## Используемые инструменты:
