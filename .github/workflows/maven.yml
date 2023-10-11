@@ -20,24 +20,24 @@ jobs:
           distribution: 'temurin'
           cache: maven
             
-      - name: Set up Docker Buildx
+      - name: set up Docker
         uses: docker/setup-buildx-action@v3
 
-      - name: Checkout sun6r0/test-service
+      - name: checkout sun6r0/test-service
         uses: actions/checkout@v4
         with:
           repository: sun6r0/test-service
 
-      - name: Checkout tests
+      - name: checkout repo
         uses: actions/checkout@v4
         with:
           path: mine
 
-      - name: Build docker images
+      - name: build docker-compose
         uses: isbang/compose-action@v1.5.1
         with:
           compose-file: "https://github.com/sun6r0/test-service/blob/main/docker-compose.yaml"
           up-flags: "--build -d"
           
-      - name: Build with Maven
+      - name: build with Maven
         run: mvn -B clean test --file mine/pom.xml
