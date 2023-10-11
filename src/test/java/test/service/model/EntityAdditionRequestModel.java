@@ -12,4 +12,11 @@ public class EntityAdditionRequestModel {
     private Boolean verified;
     private AdditionRequestModel addition;
     private List<Integer> important_numbers;
+
+    public EntityAdditionRequestModel(String title, Boolean verified, AdditionRequestModel addition, List<Integer> important_numbers) {
+        this.title = title;
+        this.verified = verified;
+        this.addition = addition;
+        this.important_numbers = important_numbers;
+    }
 }
