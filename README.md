@@ -35,6 +35,6 @@
 Напишем пять тегов *\<test>*, в которых укажем тестовые классы: **GetEntityTest**, **CreateEntityTest**, **DeleteEntityTest**, **GetAllEntitiesTest**, **UpdateEntityTest**.
 Таким образом, параллельно запускаются пять тестовых классов.
 ## Дополнительное задание №3. Реализация запуска в системе CI/CD
-Можно реализовать запуск в системе CI/CD в *Github* на вкладке *Actions*, подробнее: [github-actions](https://docs.github.com/ru/actions/learn-github-actions/understanding-github-actions).
+Можно реализовать запуск в системе CI/CD в *Github* на вкладке *Actions*, подробнее: [github-actions](https://docs.github.com/ru/actions/learn-github-actions/understanding-github-actions). Про запуск docker-compose: [compose-action](https://github.com/isbang/compose-action?ysclid=lnlq267fwy191556728).
 ## Автор
 Работу выполнила *Плигина Эвелина*.
